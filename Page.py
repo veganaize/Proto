@@ -2,7 +2,7 @@ from Parser import Parser
 
 
 class Response:
-    def __init__(self, response):
+    def __init__(self, response=None):
         self.response = response
 
     def read(self):

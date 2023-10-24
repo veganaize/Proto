@@ -23,4 +23,4 @@ def request_url(address):
         return Page(Response(urllib.request.urlopen(address)))
     except:
         print('Exception! Opening URL.')
-        return Page(Response(None))
+        return Page(Response())
