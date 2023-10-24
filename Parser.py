@@ -2,10 +2,6 @@ import shutil
 from html.parser import HTMLParser
 
 
-class NoParser(HTMLParser):
-    ...
-
-
 class LangParser:
     def handle_starttag(self, tag, attrs):
         ...
@@ -16,8 +12,7 @@ class Parser(HTMLParser):
     def __init__(self, page):
         super().__init__()
         self.page = page
-        self.parser = NoParser
-        self.no_parser = NoParser()
+        self.parser = BodyParser
         self.parsers = {
             'html': LangParser,
             'head': HeadParser,
