@@ -3,6 +3,9 @@ from html.parser import HTMLParser
 
 
 class LangParser:
+    def __init__(self, page):
+        ...
+        
     def handle_starttag(self, tag, attrs):
         ...
         #print('html tag:', tag, ', attrs:', attrs)
@@ -28,7 +31,7 @@ class Parser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         print('starttag:', tag, ', attrs:', attrs)
         self.parser = self.parsers.get(tag, self.parser)
-        return self.parser().handle_starttag(tag, attrs)
+        return self.parser(self.page).handle_starttag(tag, attrs)
 
     def handle_data(self, data):
         """Handle textual data in between opening/closing tags."""
@@ -42,9 +45,11 @@ class Parser(HTMLParser):
 
 
 class HeadParser:
-    def __init__(self):
+    def __init__(self, page):
+        self.page = page
         self.tags = {
-            #'meta': handle_meta_tag
+            'head': self.handle_head_tag,
+            'meta': self.handle_meta_tag
         }
 
     def handle_starttag(self, tag, attrs):
@@ -59,6 +64,15 @@ class HeadParser:
 ##                        ) as response:
 ##                    shutil.copyfileobj(response, file)
 
+    def handle_head_tag(self, tag, attrs):
+        ...
+
+    def handle_meta_tag(self, tag, attrs):
+        attrs = dict(attrs)
+        if 'charset' in attrs:
+            self.page.encoding = attrs['charset'].strip().lower()
+            print('Encoding set to:', self.page.encoding, 'in handle_meta_tag()')
+        
     def handle_unknown_tag(self, tag, attrs):
         print('No handler for', tag, 'tag.')
 
@@ -70,6 +84,9 @@ class HeadParser:
 
 
 class BodyParser:
+    def __init__(self, page):
+        ...
+        
     def handle_starttag(self, tag, attrs):
         ...
 
