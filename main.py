@@ -4,7 +4,7 @@ import sys
 import Browser
 
 
-homepage = 'http://example.com/index.html'
+homepage = 'http://example.com/homepage'
 
 
 def parse_arguments():

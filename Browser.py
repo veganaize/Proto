@@ -21,6 +21,14 @@ user_agents = {
 def request_url(address):
     try:
         return Page(Response(urllib.request.urlopen(address)))
+    
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print('404')
+            page = Page(Response())
+            page.html = e.read()
+            return page
+        
     except:
         print('Exception! Opening URL.')
         return Page(Response())
