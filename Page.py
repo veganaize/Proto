@@ -2,15 +2,16 @@ from Parser import Parser
 
 
 class Response:
-    def __init__(self, response=None):
+    def __init__(self, response=None, bytes_string=b''):
         self.response = response
+        self.bytes_string = bytes_string
 
     def read(self):
         try:
             return self.response.read()
         except:
             print('response.read() failed')
-            return b''
+            return self.bytes_string
 
     def getheader(self, header):
         try:

@@ -25,9 +25,7 @@ def request_url(address):
     except urllib.error.HTTPError as e:
         if e.code == 404:
             print('404')
-            page = Page(Response())
-            page.html = e.read()
-            return page
+            return Page(Response(e))
         
     except:
         print('Exception! Opening URL.')
