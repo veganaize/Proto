@@ -30,6 +30,9 @@ class Page:
         self.response = response
         self.html = response.read()
 
+    def as_source(self):
+        return self.html.decode(self.determine_encoding().encoding)
+    
     def determine_encoding(self):
         self.mime_type, encoding = self.response.getheader('Content-Type')
         if encoding.strip() == 'charset=utf-8':
@@ -40,5 +43,4 @@ class Page:
 
     def render(self):
         Parser(self).feed(self.html.decode(self.determine_encoding().encoding))
-        print(self.html.decode(self.determine_encoding().encoding))
         return self

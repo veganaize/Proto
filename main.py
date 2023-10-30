@@ -30,6 +30,7 @@ def parse_arguments():
 def display_page(address=homepage):
     page = Browser.request_url(address)
     page.render()
+    print(page.as_source())
 
 
 if __name__ == '__main__':
