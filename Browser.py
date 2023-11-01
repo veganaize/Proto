@@ -25,6 +25,6 @@ def request_url(address):
     except urllib.error.HTTPError as e:
         return Page(Response(e))
         
-    except:
-        print('Unknown exception opening URL in browser.')
+    except Exception as e:
+        print(e)
         return Page(Response())
