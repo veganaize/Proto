@@ -15,6 +15,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x86
+        cache: pip
     - name: Install dependencies
       run: |
         pip install pylint==3.2.7
