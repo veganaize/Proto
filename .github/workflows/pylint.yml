@@ -5,25 +5,18 @@ on: [push]
 jobs:
   build:
     runs-on: windows-2019
-#    defaults:
-#      run:
-#        shell: cmd
     strategy:
       matrix:
         python-version: ["3.8"]
     steps:
     - uses: actions/checkout@v4
-    - name: Generate pip requirements file
-      run: echo pylint==3.2.7 >requirements.txt
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x86
-#        cache: 'pip'
     - name: Install dependencies
-#      run: pip install pylint==3.2.7
-       run: pip install -r requirements.txt
+      run: pip install pylint==3.2.7
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
