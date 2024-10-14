@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: windows-2019
+    defaults:
+      run:
+        shell: cmd
     strategy:
       matrix:
         python-version: ["3.8"]
